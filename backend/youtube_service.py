@@ -21,7 +21,6 @@ def search_videos(query, max_results=5):
     }
     response = requests.get(url, params=params)
     data = response.json()
-    
     videos = []
     for item in data['items']:
         video = {
@@ -68,4 +67,8 @@ def get_comments(video_id, max_comments=100):
         data = response.json()
         for item in data['items']:
             comment = item['snippet']['topLevelComment']['snippet']['textDisplay']
-            likes = ite
+            likes = item['snippet']['topLevelComment']['snippet']['likeCount']
+            comments.append({'text': comment, 'likes': likes})
+    except Exception as e:
+        print(f"Comments error: {e}")
+    return comments

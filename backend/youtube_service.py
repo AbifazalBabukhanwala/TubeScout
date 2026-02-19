@@ -1,11 +1,9 @@
 import os
-import sys
+import requests
 from dotenv import load_dotenv
 
 dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
 load_dotenv(dotenv_path)
-
-import requests
 
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 BASE_URL = "https://www.googleapis.com/youtube/v3"
@@ -70,8 +68,4 @@ def get_comments(video_id, max_comments=100):
         data = response.json()
         for item in data['items']:
             comment = item['snippet']['topLevelComment']['snippet']['textDisplay']
-            likes = item['snippet']['topLevelComment']['snippet']['likeCount']
-            comments.append({'text': comment, 'likes': likes})
-    except Exception as e:
-        print(f"Comments error: {e}")
-    return comments
+            likes = ite
